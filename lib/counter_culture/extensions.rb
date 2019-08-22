@@ -36,11 +36,11 @@ module CounterCulture
               if: ->(model) { model.discarded? }
             after_update :_update_counts_after_update,
               if: ->(model) { !model.discarded? }
-            after_commit :_update_counts_after_destroy, on: :destroy,
+            after_destroy :_update_counts_after_destroy,
               if: ->(model) { !model.discarded? }
           else
             after_update :_update_counts_after_update
-            after_commit :_update_counts_after_destroy, on: :destroy
+            after_destroy :_update_counts_after_destroy
           end
 
           # we keep a list of all counter caches we must maintain
